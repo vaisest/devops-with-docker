@@ -1,0 +1,42 @@
+$ sudo docker rm -f $(sudo docker ps -aq) && sudo docker rmi -f $(sudo docker images -aq)
+c3a07ce99761
+992a501e1795
+76264448caf4
+4f7f7abae2a4
+Untagged: nginx:latest
+Untagged: nginx@sha256:480868e8c8c797794257e2abd88d0f9a8809b2fe956cbfbc05dcc0bca1f7cd43
+Deleted: sha256:448a08f1d2f94e8db6db9286fd77a3a4f3712786583720a12f1648abb8cace25
+Deleted: sha256:6b33c8bf5207fd88b6e0f942c230c59477990205dbed0ae41d54b5b29ed1051d
+Deleted: sha256:a673eda43a02c5a8218e8be171c43912dc9646d588a881a463be970b7f06abf0
+Deleted: sha256:e22652bd991fd7a83155d12651d319458cb233d428ca769323ecb0b1d6549844
+Deleted: sha256:77350fbf9b519374ed1eee1c2387b1c9af0c7f048d11794fe172006323834954
+Deleted: sha256:556cbc099a5c304d0f2fed44d6d153b7d74be08fce2b4ffe74b1183b75c5cae6
+Deleted: sha256:8553b91047dad45bedc292812586f1621e0a464a09a7a7c2ce6ac5f8ba2535d7
+Untagged: 688617752407.dkr.ecr.eu-west-1.amazonaws.com/ohtup-lentovaraukset:latest
+Untagged: 688617752407.dkr.ecr.eu-west-1.amazonaws.com/ohtup-lentovaraukset@sha256:008c26244b8460f9480316c694857365ec624fb134f52ab1693887d283f6f702
+Untagged: lentomono:latest
+Deleted: sha256:1210166a06c7d393f505a7bd8ed943dc0e7d799bfafeddd8460f4144a7e432dd
+Deleted: sha256:c6d709b5751d3373ba109d7829f6ecb81da251a5c0301adeb056b831dc028000
+Deleted: sha256:e6093f599c7dc1becabf7b2f01b70f3cb0e87521cc6b290e05829c141e4a57ab
+Deleted: sha256:07cb32bd1f9bcebc62aa29331f6b7430cbb93d84d30863f7e538c0b87a7df4d0
+Deleted: sha256:91412a5dcb4874fca2d3525f25c3e573507dd95634ea0f16ed4c627cf4627f45
+Deleted: sha256:246d49dc3d36771a21026cb4ec1308f44734c1d0c26248e924839b9666d7e01a
+Deleted: sha256:6d6f7f4e3fa8fafaae5242a95457a4e5641ea3627659760fbb27dcf809a94622
+Deleted: sha256:705473a47c0ba47ead0a75aee35aadb664cee3bdb7067e7b4bb4a44898c1cc4a
+Deleted: sha256:d95a77ec553c6e5a0e40ec4d0c8deb64ce4a4f91cd46953d247cb6229036ed29
+Deleted: sha256:a2395b8a614e595fc0d4af02ad4640ecc0c7789255489acb08fed184daf7e14b
+Deleted: sha256:61fc63567db565574fd9c15f881f1443caecf09e17615e5aa93175afea7ac32a
+Untagged: node:19-alpine
+Untagged: node@sha256:a67a33f791d1c86ced985f339fa160f6188f590ebbe963fe11cc00adc971fa41
+Deleted: sha256:cddebfd139342425ebc719224414486c06f0159d262f9cf3004453df9f3ed4b9
+Error response from daemon: No such image: 1210166a06c7:latest
+Error response from daemon: No such image: c6d709b5751d:latest
+Error response from daemon: No such image: e6093f599c7d:latest
+Error response from daemon: No such image: 91412a5dcb48:latest
+Error response from daemon: No such image: 6d6f7f4e3fa8:latest
+Error response from daemon: No such image: d95a77ec553c:latest
+Error response from daemon: No such image: a2395b8a614e:latest
+$ sudo docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+$ sudo docker images -a
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE

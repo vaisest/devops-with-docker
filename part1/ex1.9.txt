@@ -6,7 +6,7 @@ Wrote text to /usr/src/app/text.log
 Wrote text to /usr/src/app/text.log
 Wrote text to /usr/src/app/text.log
 ^C
-turtvaiz@fuxi ~/Projects/devops-with-docker/part1 $ cat text.log
+~/Projects/devops-with-docker/part1 $ cat text.log
 2023-05-23 15:59:29 +0000 UTC
 2023-05-23 15:59:31 +0000 UTC
 2023-05-23 15:59:33 +0000 UTC

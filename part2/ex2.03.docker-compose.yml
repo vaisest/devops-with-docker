@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  frontend:
+    # image: node:16
+    build:
+      context: .
+      dockerfile: ./ex2.03.front.Dockerfile
+    ports:
+      - 5000:5000
+
+  backend:
+    # image: golang
+    build:
+      context: .
+      dockerfile: ./ex2.03.back.Dockerfile
+    ports:
+      - 8080:8080

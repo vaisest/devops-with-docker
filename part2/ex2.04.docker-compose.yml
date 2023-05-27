@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  frontend:
+    # image: node:16
+    build:
+      context: .
+      dockerfile: ./ex2.04.front.Dockerfile
+      args:
+        - REACT_APP_BACKEND_URL=http://localhost:8080
+    ports:
+      - 5000:5000
+
+  backend:
+    # image: golang
+    build:
+      context: .
+      dockerfile: ./ex2.04.back.Dockerfile
+    environment:
+      - REDIS_HOST=cache
+    ports:
+      - 8080:8080
+
+  cache:
+    image: redis

@@ -1,0 +1,29 @@
+~/Projects/devops-with-docker/part2 $ docker compose -f scaling-exercise/docker-compose.yml up --scale compute=24 -d
+[+] Building 0.0s (0/0)                                                                                                                          
+[+] Running 26/26
+ ✔ Container calculator                   Started                                                                                           1.0s 
+ ✔ Container load-balancer                Started                                                                                           0.9s 
+ ✔ Container scaling-exercise-compute-20  Started                                                                                           1.0s 
+ ✔ Container scaling-exercise-compute-9   Started                                                                                           1.5s 
+ ✔ Container scaling-exercise-compute-15  Started                                                                                           2.0s 
+ ✔ Container scaling-exercise-compute-13  Started                                                                                           2.7s 
+ ✔ Container scaling-exercise-compute-22  Started                                                                                           3.3s 
+ ✔ Container scaling-exercise-compute-10  Started                                                                                           3.9s 
+ ✔ Container scaling-exercise-compute-24  Started                                                                                           4.5s 
+ ✔ Container scaling-exercise-compute-18  Started                                                                                           5.0s 
+ ✔ Container scaling-exercise-compute-17  Started                                                                                           5.5s 
+ ✔ Container scaling-exercise-compute-16  Started                                                                                           6.1s 
+ ✔ Container scaling-exercise-compute-19  Started                                                                                           6.7s 
+ ✔ Container scaling-exercise-compute-11  Started                                                                                           7.3s 
+ ✔ Container scaling-exercise-compute-14  Started                                                                                           7.8s 
+ ✔ Container scaling-exercise-compute-12  Started                                                                                           8.4s 
+ ✔ Container scaling-exercise-compute-23  Started                                                                                           8.9s 
+ ✔ Container scaling-exercise-compute-21  Started                                                                                           9.4s 
+ ✔ Container scaling-exercise-compute-7   Started                                                                                           9.9s 
+ ✔ Container scaling-exercise-compute-3   Started                                                                                          10.6s 
+ ✔ Container scaling-exercise-compute-4   Started                                                                                          11.2s 
+ ✔ Container scaling-exercise-compute-1   Started                                                                                          11.7s 
+ ✔ Container scaling-exercise-compute-8   Started                                                                                          12.2s 
+ ✔ Container scaling-exercise-compute-5   Started                                                                                          12.8s 
+ ✔ Container scaling-exercise-compute-6   Started                                                                                          13.4s 
+ ✔ Container scaling-exercise-compute-2   Started                                                                                          14.0s 

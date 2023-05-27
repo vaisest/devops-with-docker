@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./ex2.04.front.Dockerfile
+      args:
+        - REACT_APP_BACKEND_URL=http://localhost:8080
+    ports:
+      - 5000:5000
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./ex2.04.back.Dockerfile
+    environment:
+      - REDIS_HOST=cache
+      - POSTGRES_HOST=db
+    ports:
+      - 8080:8080
+
+  cache:
+    image: redis:alpine
+
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./psql_data:/var/lib/postgresql/data

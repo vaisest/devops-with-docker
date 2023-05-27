@@ -1,0 +1,6 @@
+I have used Docker more for running the programs themselves than running development services, but
+I have used it to run Postgres. Although I ended up installing it on my own system after all.
+
+For running the apps here's an example: https://github.com/Ohtuprojekti-Fintraffic/lentovaraukset/pull/262
+That Dockerfile builds a TS/Node backend and a TS/React frontend. Then it serves the frontend files 
+and backend with Express.js.

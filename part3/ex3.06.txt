@@ -1,0 +1,93 @@
+Before optimising anything:
+~/Projects/devops-with-docker/part3 $ docker image history front:unoptimised
+IMAGE          CREATED        CREATED BY                                      SIZE      COMMENT
+8f9a13edb92f   4 days ago     EXPOSE map[5000/tcp:{}]                         0B        buildkit.dockerfile.v0
+<missing>      4 days ago     CMD ["/bin/sh" "-c" "npx serve -s -l 5000 bu…   0B        buildkit.dockerfile.v0
+<missing>      4 days ago     RUN /bin/sh -c npm run build # buildkit         8.68MB    buildkit.dockerfile.v0
+<missing>      4 days ago     RUN /bin/sh -c npm ci # buildkit                334MB     buildkit.dockerfile.v0
+<missing>      4 days ago     COPY example-frontend . # buildkit              708kB     buildkit.dockerfile.v0
+<missing>      4 days ago     WORKDIR /home/app                               0B        buildkit.dockerfile.v0
+<missing>      4 days ago     USER app                                        0B        buildkit.dockerfile.v0
+<missing>      4 days ago     RUN /bin/sh -c addgroup app && adduser app -…   4.87kB    buildkit.dockerfile.v0
+<missing>      2 months ago   /bin/sh -c #(nop)  CMD ["node"]                 0B        
+<missing>      2 months ago   /bin/sh -c #(nop)  ENTRYPOINT ["docker-entry…   0B        
+<missing>      2 months ago   /bin/sh -c #(nop) COPY file:4d192565a7220e13…   388B      
+<missing>      2 months ago   /bin/sh -c apk add --no-cache --virtual .bui…   7.77MB    
+<missing>      2 months ago   /bin/sh -c #(nop)  ENV YARN_VERSION=1.22.19     0B        
+<missing>      2 months ago   /bin/sh -c addgroup -g 1000 node     && addu…   102MB     
+<missing>      2 months ago   /bin/sh -c #(nop)  ENV NODE_VERSION=16.20.0     0B        
+<missing>      2 months ago   /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B        
+<missing>      2 months ago   /bin/sh -c #(nop) ADD file:9a4f77dfaba7fd2aa…   7.04MB
+
+~/Projects/devops-with-docker/part3 $ docker image history back:unoptimised
+IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+fd004ad0b594   4 days ago    CMD ["/bin/sh" "-c" "./server"]                 0B        buildkit.dockerfile.v0
+<missing>      4 days ago    RUN /bin/sh -c go build # buildkit              233MB     buildkit.dockerfile.v0
+<missing>      4 days ago    COPY example-backend . # buildkit               29.9kB    buildkit.dockerfile.v0
+<missing>      4 days ago    WORKDIR /home/app                               0B        buildkit.dockerfile.v0
+<missing>      4 days ago    USER app                                        0B        buildkit.dockerfile.v0
+<missing>      4 days ago    RUN /bin/sh -c addgroup app && adduser app -…   4.68kB    buildkit.dockerfile.v0
+<missing>      3 weeks ago   /bin/sh -c #(nop) WORKDIR /go                   0B        
+<missing>      3 weeks ago   /bin/sh -c mkdir -p "$GOPATH/src" "$GOPATH/b…   0B        
+<missing>      3 weeks ago   /bin/sh -c #(nop)  ENV PATH=/go/bin:/usr/loc…   0B        
+<missing>      3 weeks ago   /bin/sh -c #(nop)  ENV GOPATH=/go               0B        
+<missing>      3 weeks ago   /bin/sh -c set -eux;  apk add --no-cache --v…   247MB     
+<missing>      3 weeks ago   /bin/sh -c #(nop)  ENV GOLANG_VERSION=1.20.4    0B        
+<missing>      3 weeks ago   /bin/sh -c #(nop)  ENV PATH=/usr/local/go/bi…   0B        
+<missing>      3 weeks ago   /bin/sh -c apk add --no-cache ca-certificates   502kB     
+<missing>      3 weeks ago   /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B        
+<missing>      3 weeks ago   /bin/sh -c #(nop) ADD file:7625ddfd589fb824e…   7.32MB
+
+After optimising:
+~/Projects/devops-with-docker/part3 $ docker image history front:runs_optimised 
+IMAGE          CREATED             CREATED BY                                      SIZE      COMMENT
+cb5d2010c3fc   55 minutes ago      EXPOSE map[5000/tcp:{}]                         0B        buildkit.dockerfile.v0
+<missing>      55 minutes ago      CMD ["/bin/sh" "-c" "npx serve -s -l 5000 ."]   0B        buildkit.dockerfile.v0
+<missing>      55 minutes ago      RUN /bin/sh -c npm ci && npm run build && mv…   161MB     buildkit.dockerfile.v0
+<missing>      57 minutes ago      USER app                                        0B        buildkit.dockerfile.v0
+<missing>      57 minutes ago      RUN /bin/sh -c addgroup app && adduser app -…   713kB     buildkit.dockerfile.v0
+<missing>      57 minutes ago      ENV NODE_ENV=production                         0B        buildkit.dockerfile.v0
+<missing>      About an hour ago   COPY example-frontend . # buildkit              708kB     buildkit.dockerfile.v0
+<missing>      About an hour ago   WORKDIR /home/app/                              0B        buildkit.dockerfile.v0
+<missing>      2 months ago        /bin/sh -c #(nop)  CMD ["node"]                 0B        
+<missing>      2 months ago        /bin/sh -c #(nop)  ENTRYPOINT ["docker-entry…   0B        
+<missing>      2 months ago        /bin/sh -c #(nop) COPY file:4d192565a7220e13…   388B      
+<missing>      2 months ago        /bin/sh -c apk add --no-cache --virtual .bui…   7.77MB    
+<missing>      2 months ago        /bin/sh -c #(nop)  ENV YARN_VERSION=1.22.19     0B        
+<missing>      2 months ago        /bin/sh -c addgroup -g 1000 node     && addu…   102MB     
+<missing>      2 months ago        /bin/sh -c #(nop)  ENV NODE_VERSION=16.20.0     0B        
+<missing>      2 months ago        /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B        
+<missing>      2 months ago        /bin/sh -c #(nop) ADD file:9a4f77dfaba7fd2aa…   7.04MB       
+
+~/Projects/devops-with-docker/part3 $ docker image history back:runs_optimised 
+IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+7c454ea4c3a9   3 minutes ago    CMD ["/bin/sh" "-c" "./server"]                 0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago    USER app                                        0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago    RUN /bin/sh -c chown -R app:app . # buildkit    18.6MB    buildkit.dockerfile.v0
+<missing>      3 minutes ago    RUN /bin/sh -c addgroup app && adduser app -…   4.68kB    buildkit.dockerfile.v0
+<missing>      3 minutes ago    RUN /bin/sh -c go build && mv ./server /tmp …   18.6MB    buildkit.dockerfile.v0
+<missing>      26 minutes ago   COPY example-backend . # buildkit               29.9kB    buildkit.dockerfile.v0
+<missing>      26 minutes ago   WORKDIR /home/app                               0B        buildkit.dockerfile.v0
+<missing>      3 weeks ago      /bin/sh -c #(nop) WORKDIR /go                   0B        
+<missing>      3 weeks ago      /bin/sh -c mkdir -p "$GOPATH/src" "$GOPATH/b…   0B        
+<missing>      3 weeks ago      /bin/sh -c #(nop)  ENV PATH=/go/bin:/usr/loc…   0B        
+<missing>      3 weeks ago      /bin/sh -c #(nop)  ENV GOPATH=/go               0B        
+<missing>      3 weeks ago      /bin/sh -c set -eux;  apk add --no-cache --v…   247MB     
+<missing>      3 weeks ago      /bin/sh -c #(nop)  ENV GOLANG_VERSION=1.20.4    0B        
+<missing>      3 weeks ago      /bin/sh -c #(nop)  ENV PATH=/usr/local/go/bi…   0B        
+<missing>      3 weeks ago      /bin/sh -c apk add --no-cache ca-certificates   502kB     
+<missing>      3 weeks ago      /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B        
+<missing>      3 weeks ago      /bin/sh -c #(nop) ADD file:7625ddfd589fb824e…   7.32MB    
+
+
+
+~/Projects/devops-with-docker/part3 $ docker images
+REPOSITORY       TAG              IMAGE ID       CREATED          SIZE
+back             runs_optimised   7c454ea4c3a9   3 minutes ago    292MB
+front            runs_optimised   cb5d2010c3fc   55 minutes ago   279MB
+back             latest           fd004ad0b594   5 days ago       487MB
+back             unoptimised      fd004ad0b594   5 days ago       487MB
+front            latest           8f9a13edb92f   5 days ago       461MB
+front            unoptimised      8f9a13edb92f   5 days ago       461MB
+wagoodman/dive   latest           822b23d200a3   2 years ago      82.4MB
+
